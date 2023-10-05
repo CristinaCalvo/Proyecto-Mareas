@@ -1,4 +1,4 @@
 
 
-#Buenas tardes
-print("Buenos días")
+#Pruebas
+print("Adios")
