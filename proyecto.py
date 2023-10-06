@@ -14,15 +14,19 @@ pagina = requests.get('https://ideihm.covam.es/api-ihm/getmarea?request=gettide&
 # Creamos la variable fichero para meter los datos
 fichero = pagina.json()
 
-# print(fichero) #Comprobamos que fichero es realmente los datos que necesitamos
+#Comprobamos que fichero es realmente los datos que necesitamos
+#print(fichero) 
 
-print(type(fichero['mareas']))
+#Comprobamos el tipo de objeto que es nuestro fichero para saber si es un diccionario
+#print(type(fichero['mareas']['datos']['marea']))
 
 # Tratamos el fichero JSON
-#for mareas in fichero['mareas']:
- #  print(mareas['puerto'])
 
+# Creamos variable para obtener puerto y poner "Puerto:"
+puerto = fichero['mareas']['puerto']
+mensaje = f"Puerto: {puerto}"
+print(mensaje)
 
-
-   # for datos in mareas_dict['datos']:
-    #print(datos['fecha'] + datos['hora'] + datos['altura'] + datos['tipo'])
+# Creamos variable para los datos
+datos = fichero['mareas']['datos']['marea']
+for fecha in datos:print(fecha)
