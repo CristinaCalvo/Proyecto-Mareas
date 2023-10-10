@@ -37,42 +37,60 @@ fichero = pagina.json()
 #    print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}") #Cuidado con la tabulación
 
 
-#CREAMOS EL MENÚ
+# Creamos filtrado por fecha
+fechaSelecionada = input("Seleccione una fecha de Octubre(2023-10-02): ")
+incorrecto = False
+datos = fichero['mareas']['datos']['marea']
+for dato in datos:
+    fecha = dato['fecha']
+    hora = dato['hora']
+    altura = dato['altura']
+    tipo = dato['tipo']   
 
-# Mostrar todo
-def op1():
-    datos = fichero['mareas']['datos']['marea']
-    for dato in datos:
-        fecha = dato['fecha']
-        hora = dato['hora']
-        altura = dato['altura']
-        tipo = dato['tipo']
+    if(fechaSelecionada==fecha):
         print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
+    else:
+        incorrecto = True 
+
+if(incorrecto==True):
+    print("Fecha incorrecta")
+
+
+#CREAMOS EL MENÚ
+# Mostrar todo
+#def op1():
+#    datos = fichero['mareas']['datos']['marea']
+#    for dato in datos:
+#        fecha = dato['fecha']
+#        hora = dato['hora']
+#        altura = dato['altura']
+#       tipo = dato['tipo']
+#       print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
 
 # Filtrar por fecha
-def op2():
-    print('Has elegido la opción 2')
+#def op2():
+#    print('Has elegido la opción 2')
 
 # Salir
-def op3():
-    print('Salir')
+#def op3():
+#    print('Salir')
 
 # Creamos el menú
-menu = {
-    '1': ('1.- Mostrar menú',op1),
-    '2': ('2.- Filtrar por fecha',op2),
-    '3': ('3.- Salir',op3)
-}
+#menu = {
+#   '1': ('1.- Mostrar menú',op1),
+#   '2': ('2.- Filtrar por fecha',op2),
+#   '3': ('3.- Salir',op3)
+#}
 
 # Para que el usuario pueda seleccionar opcion
-op = input("Seleccione una opcion: ")
+#op = input("Seleccione una opcion: ")
 
 # Excepcion o Accion
-accion = menu.get(op)
-if accion: #si la accion existe que se ejecute
-    accion()
-else: #si la opcion no existe que de error
-    print("Opción no válida")
+#accion = menu.get(op)
+#if accion: #si la accion existe que se ejecute
+#   accion()
+#else: #si la opcion no existe que de error
+#   print("Opción no válida")
 
 
 
