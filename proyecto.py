@@ -22,11 +22,16 @@ fichero = pagina.json()
 
 # Tratamos el fichero JSON
 
-# Creamos variable para obtener puerto y poner "Puerto:"
+# Creamos variable para obtener puerto y el instituto
 puerto = fichero['mareas']['puerto']
 mensaje = f"Puerto: {puerto}"
 print(mensaje)
 
 # Creamos variable para los datos
 datos = fichero['mareas']['datos']['marea']
-for fecha in datos:print(fecha)
+for dato in datos:
+    fecha = dato['fecha']
+    hora = dato['hora']
+    altura = dato['altura']
+    tipo = dato['tipo']
+    print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
