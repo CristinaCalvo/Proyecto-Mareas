@@ -23,15 +23,58 @@ fichero = pagina.json()
 # Tratamos el fichero JSON
 
 # Creamos variable para obtener puerto y el instituto
-puerto = fichero['mareas']['puerto']
-mensaje = f"Puerto: {puerto}"
-print(mensaje)
+#puerto = fichero['mareas']['puerto']
+#mensaje = f"Puerto: {puerto}"
+#print(mensaje)
 
 # Creamos variable para los datos
-datos = fichero['mareas']['datos']['marea']
-for dato in datos:
-    fecha = dato['fecha']
-    hora = dato['hora']
-    altura = dato['altura']
-    tipo = dato['tipo']
-    print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
+#datos = fichero['mareas']['datos']['marea']
+#for dato in datos:
+#    fecha = dato['fecha']
+#    hora = dato['hora']
+#    altura = dato['altura']
+#    tipo = dato['tipo']
+#    print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}") #Cuidado con la tabulación
+
+
+#CREAMOS EL MENÚ
+
+# Mostrar todo
+def op1():
+    datos = fichero['mareas']['datos']['marea']
+    for dato in datos:
+        fecha = dato['fecha']
+        hora = dato['hora']
+        altura = dato['altura']
+        tipo = dato['tipo']
+        print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
+
+# Filtrar por fecha
+def op2():
+    print('Has elegido la opción 2')
+
+# Salir
+def op3():
+    print('Salir')
+
+# Creamos el menú
+menu = {
+    '1': ('1.- Mostrar menú',op1),
+    '2': ('2.- Filtrar por fecha',op2),
+    '3': ('3.- Salir',op3)
+}
+
+# Para que el usuario pueda seleccionar opcion
+op = input("Seleccione una opcion: ")
+
+# Excepcion o Accion
+accion = menu.get(op)
+if accion: #si la accion existe que se ejecute
+    accion()
+else: #si la opcion no existe que de error
+    print("Opción no válida")
+
+
+
+
+
