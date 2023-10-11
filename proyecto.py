@@ -38,22 +38,78 @@ fichero = pagina.json()
 
 
 # Creamos filtrado por fecha
-fechaSelecionada = input("Seleccione una fecha de Octubre(2023-10-02): ")
-incorrecto = False
-datos = fichero['mareas']['datos']['marea']
-for dato in datos:
-    fecha = dato['fecha']
-    hora = dato['hora']
-    altura = dato['altura']
-    tipo = dato['tipo']   
+#fechaSelecionada = input("Seleccione una fecha de Octubre(2023-10-02): ")
+#incorrecto = True
+#datos = fichero['mareas']['datos']['marea']
+#for dato in datos:
+#   fecha = dato['fecha']
+#   hora = dato['hora']
+#   altura = dato['altura']
+#   tipo = dato['tipo']   
+#
+#   if(fechaSelecionada==fecha):
+#       print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
+#       incorrecto = False
+#
+#if(incorrecto==True):
+#   print("Fecha incorrecta")
 
-    if(fechaSelecionada==fecha):
-        print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
-    else:
-        incorrecto = True 
 
-if(incorrecto==True):
-    print("Fecha incorrecta")
+# Creamos prediccion de mareas
+import datetime
+
+incorrectoF = True
+fechaExiste = False
+
+vfecha = input("Selecione una fecha de Octubre(2023-10-02)[Si no introduce nada se pondra la hora y el día actual]: ")
+if vfecha:  
+            datos = fichero['mareas']['datos']['marea']
+            for dato in datos:
+                fecha = dato['fecha']
+                hora = dato['hora']
+
+                if(vfecha==fecha):
+                    fechaExiste= True
+                    incorrectoF = False
+
+            # Si seleccionas todo y la fecha existe
+            if(fechaExiste==True):
+                    vhora = input("Selecione una hora(10:40): ")
+                    if vhora:
+                        datos = fichero['mareas']['datos']['marea']
+                        for dato in datos:
+                            fecha = dato['fecha']
+                            hora = dato['hora']
+                        
+                        # Si la hora esta bien escrita (no tiene por que existir en nuestros datos)
+                        try:
+                            hora_obj = datetime.datetime.strptime(vhora, '%H:%M').time()
+                            print("Fecha: ", vfecha)
+                            print("Hora: ", vhora)
+
+                        # Calculamos porcentaje bajada o subida del mar
+
+
+
+
+                        except ValueError:
+                            print("Hora incorrecta")
+                            
+                    else:
+                        print("No se ha introducido hora")
+
+            if(incorrectoF==True):
+                print("Fecha incorrecta")
+   
+# Si no seleccionas nada        
+else:  
+   fecha_hora_actual = datetime.datetime.now()
+   print("Fecha actual:", fecha_hora_actual.date())  
+   print("Hora actual:", fecha_hora_actual.time()) 
+
+# Calculamos porcentaje bajada o subida del mar
+
+   
 
 
 #CREAMOS EL MENÚ
