@@ -76,9 +76,10 @@ if vfecha:
                     vhora = input("Selecione una hora(10:40): ")
                     if vhora:
                         datos = fichero['mareas']['datos']['marea']
-                        for dato in datos:
-                            hora = dato['hora']
-                            altura = dato['altura']
+                        for i in range(len(datos)):
+                            fecha = datos[i]['fecha']
+                            hora = datos[i]['hora']
+                            tipo = datos[i]['tipo']
                         
                         # Si la hora esta bien escrita (no tiene por que existir en nuestros datos)
                         try:
@@ -89,14 +90,24 @@ if vfecha:
                         except ValueError:
                             print("Hora incorrecta")
 
-                        # Calculamos bajada o subida respecto a la hora siguiente
-                        if hora > vhora:
-                            siguiente_hora = hora
-                                 
-                            if siguiente_hora:
-                                    print(f"Habra marea x hasta las {siguiente_hora}")
-                        else:
-                            print("No se encontró una hora posterior en los datos para la hora ingresada.")
+                        # Calculamos bajada o subida respecto a la fecha siguiente(tanto día como hora)
+
+                        ifecha = datetime.datetime.strptime(vfecha + ' ' + vhora, '%Y-%m-%d %H:%M')
+                        fechact = datetime.datetime.strptime(fecha + ' ' + hora, '%Y-%m-%d %H:%M')
+
+                        if fechact > ifecha:
+                            sfecha = fecha
+                            shora = hora
+                            stipo = tipo
+                                        
+
+                            if shora:
+                                if(stipo=="pleamar"):
+                                    print("En el día", sfecha, "la marea estará subiendo hasta las", shora)
+                                else:
+                                    print("En el día", sfecha, "la marea estará bajando hasta las", shora)
+                            else:
+                                print("No se encontró una hora posterior en los datos para la hora ingresada.")
                            
                           
                     else:
@@ -110,10 +121,6 @@ else:
    fechactual = datetime.datetime.now()
    print("Fecha actual:", fechactual.date())  
    print("Hora actual:", fechactual.time()) 
-
-# Calculamos porcentaje bajada o subida del mar
-
-   
 
 
 #CREAMOS EL MENÚ
