@@ -66,7 +66,6 @@ if vfecha:
             datos = fichero['mareas']['datos']['marea']
             for dato in datos:
                 fecha = dato['fecha']
-                hora = dato['hora']
 
                 if(vfecha==fecha):
                     fechaExiste= True
@@ -78,23 +77,28 @@ if vfecha:
                     if vhora:
                         datos = fichero['mareas']['datos']['marea']
                         for dato in datos:
-                            fecha = dato['fecha']
                             hora = dato['hora']
+                            altura = dato['altura']
                         
                         # Si la hora esta bien escrita (no tiene por que existir en nuestros datos)
                         try:
-                            hora_obj = datetime.datetime.strptime(vhora, '%H:%M').time()
+                            horaFormato = datetime.datetime.strptime(vhora, '%H:%M').time()
                             print("Fecha: ", vfecha)
                             print("Hora: ", vhora)
 
-                        # Calculamos porcentaje bajada o subida del mar
-
-
-
-
                         except ValueError:
                             print("Hora incorrecta")
-                            
+
+                        # Calculamos bajada o subida respecto a la hora siguiente
+                        if hora > vhora:
+                            siguiente_hora = hora
+                                 
+                            if siguiente_hora:
+                                    print(f"Habra marea x hasta las {siguiente_hora}")
+                        else:
+                            print("No se encontró una hora posterior en los datos para la hora ingresada.")
+                           
+                          
                     else:
                         print("No se ha introducido hora")
 
@@ -103,9 +107,9 @@ if vfecha:
    
 # Si no seleccionas nada        
 else:  
-   fecha_hora_actual = datetime.datetime.now()
-   print("Fecha actual:", fecha_hora_actual.date())  
-   print("Hora actual:", fecha_hora_actual.time()) 
+   fechactual = datetime.datetime.now()
+   print("Fecha actual:", fechactual.date())  
+   print("Hora actual:", fechactual.time()) 
 
 # Calculamos porcentaje bajada o subida del mar
 
