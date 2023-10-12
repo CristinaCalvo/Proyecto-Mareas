@@ -58,81 +58,53 @@ fichero = pagina.json()
 # Creamos prediccion de mareas
 import datetime
 
-incorrectoF = True
-fechaExiste = False
+vfecha = input("Introduce una fecha como en el ejemplo '2023-10-02'(Octubre): ")
+vhora = input("Introduce una hora como en el ejemplo '10:40': ")
 
-vfecha = input("Selecione una fecha de Octubre(2023-10-02)[Si no introduce nada se pondra la hora y el día actual]: ")
-if vfecha:  
-            datos = fichero['mareas']['datos']['marea']
-            for dato in datos:
-                fecha = dato['fecha']
+# Si no seleccionas nada  
+if not vfecha:
+   ifecha = datetime.datetime.now() # Se pone la hora del sistema
+else:
 
-                if(vfecha==fecha):
-                    fechaExiste= True
-                    incorrectoF = False
+    # Si seleccionas fecha y hora
+    try:
+        ifecha = datetime.datetime.strptime(vfecha + ' ' + vhora, '%Y-%m-%d %H:%M')
+    except ValueError:
+        print("Fecha u hora incorrecta.")
+        exit()
 
-            # Si seleccionas todo y la fecha existe
-            if(fechaExiste==True):
-                    vhora = input("Selecione una hora(10:40): ")
-                    if vhora:
-                        datos = fichero['mareas']['datos']['marea']
-                        for i in range(len(datos)):
-                            fecha = datos[i]['fecha']
-                            hora = datos[i]['hora']
-                            tipo = datos[i]['tipo']
-                        
-                        # Si la hora esta bien escrita (no tiene por que existir en nuestros datos)
-                        try:
-                            horaFormato = datetime.datetime.strptime(vhora, '%H:%M').time()
-                            print("Fecha: ", vfecha)
-                            print("Hora: ", vhora)
+datos = fichero['mareas']['datos']['marea']
+for i in range(len(datos)):
+    fecha = datos[i]['fecha']
+    hora = datos[i]['hora']
+    tipo = datos[i]['tipo']
+    
+    # Convierte la fecha y hora actual en datetime para compararlos(tanto día como hora)
+    fechact = datetime.datetime.strptime(fecha + ' ' + hora, '%Y-%m-%d %H:%M')
 
-                        except ValueError:
-                            print("Hora incorrecta")
+    # Compara si la fecha y hora actual es mayor a la ingresada
+    if fechact > ifecha:
+        sfecha = fechact
+        shora = hora
+        stipo = tipo
+        break
 
-                        # Calculamos bajada o subida respecto a la fecha siguiente(tanto día como hora)
+if sfecha and shora:
+    print("Fecha: ", ifecha.strftime('%Y-%m-%d %H:%M')) #Con .strftime puedes coger una parte el día o la hora
 
-                        ifecha = datetime.datetime.strptime(vfecha + ' ' + vhora, '%Y-%m-%d %H:%M')
-                        fechact = datetime.datetime.strptime(fecha + ' ' + hora, '%Y-%m-%d %H:%M')
+    if(stipo=="pleamar"):
+        print("En el día", sfecha.strftime('%Y-%m-%d'), "la marea estará subiendo hasta las", shora, )
+    else:
+        print("En el día", sfecha.strftime('%Y-%m-%d'), "la marea estará bajando hasta las", shora, )
 
-                        if fechact > ifecha:
-                            sfecha = fecha
-                            shora = hora
-                            stipo = tipo
-                                        
-
-                            if shora:
-                                if(stipo=="pleamar"):
-                                    print("En el día", sfecha, "la marea estará subiendo hasta las", shora)
-                                else:
-                                    print("En el día", sfecha, "la marea estará bajando hasta las", shora)
-                            else:
-                                print("No se encontró una hora posterior en los datos para la hora ingresada.")
-                           
-                          
-                    else:
-                        print("No se ha introducido hora")
-
-            if(incorrectoF==True):
-                print("Fecha incorrecta")
-   
-# Si no seleccionas nada        
-else:  
-   fechactual = datetime.datetime.now()
-   print("Fecha actual:", fechactual.date())  
-   print("Hora actual:", fechactual.time()) 
+else:
+    print("No se encontró una fecha y hora siguientes en los datos.")
 
 
 #CREAMOS EL MENÚ
 # Mostrar todo
 #def op1():
-#    datos = fichero['mareas']['datos']['marea']
-#    for dato in datos:
-#        fecha = dato['fecha']
-#        hora = dato['hora']
-#        altura = dato['altura']
-#       tipo = dato['tipo']
-#       print(f"Fecha: {fecha} - Hora: {hora} - Altura: {altura} - Tipo: {tipo}")
+#    print('Has elegido la opción 1')
 
 # Filtrar por fecha
 #def op2():
