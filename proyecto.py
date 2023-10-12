@@ -56,80 +56,81 @@ fichero = pagina.json()
 
 
 # Creamos prediccion de mareas
-import datetime
+#import datetime
 
-vfecha = input("Introduce una fecha como en el ejemplo '2023-10-02'(Octubre): ")
-vhora = input("Introduce una hora como en el ejemplo '10:40': ")
+#vfecha = input("Introduce una fecha como en el ejemplo '2023-10-02'(Octubre): ")
+#vhora = input("Introduce una hora como en el ejemplo '10:40': ")
 
 # Si no seleccionas nada  
-if not vfecha:
-   ifecha = datetime.datetime.now() # Se pone la hora del sistema
-else:
+#if not vfecha:
+#   ifecha = datetime.datetime.now() # Se pone la hora del sistema
+#else:
 
     # Si seleccionas fecha y hora
-    try:
-        ifecha = datetime.datetime.strptime(vfecha + ' ' + vhora, '%Y-%m-%d %H:%M')
-    except ValueError:
-        print("Fecha u hora incorrecta.")
-        exit()
+ #   try:
+  #      ifecha = datetime.datetime.strptime(vfecha + ' ' + vhora, '%Y-%m-%d %H:%M')
+   # except ValueError:
+    #    print("Fecha u hora incorrecta.")
+     #   exit()
 
-datos = fichero['mareas']['datos']['marea']
-for i in range(len(datos)):
-    fecha = datos[i]['fecha']
-    hora = datos[i]['hora']
-    tipo = datos[i]['tipo']
+#datos = fichero['mareas']['datos']['marea']
+#for i in range(len(datos)):
+ #   fecha = datos[i]['fecha']
+    #  hora = datos[i]['hora']
+    #  tipo = datos[i]['tipo']
     
     # Convierte la fecha y hora actual en datetime para compararlos(tanto día como hora)
-    fechact = datetime.datetime.strptime(fecha + ' ' + hora, '%Y-%m-%d %H:%M')
+    #  fechact = datetime.datetime.strptime(fecha + ' ' + hora, '%Y-%m-%d %H:%M')
 
     # Compara si la fecha y hora actual es mayor a la ingresada
-    if fechact > ifecha:
-        sfecha = fechact
-        shora = hora
-        stipo = tipo
-        break
+   #   if fechact > ifecha:
+      #    sfecha = fechact
+         # shora = hora
+         # stipo = tipo
+         # break
 
-if sfecha and shora:
-    print("Fecha: ", ifecha.strftime('%Y-%m-%d %H:%M')) #Con .strftime puedes coger una parte el día o la hora
+ # if sfecha and shora:
+    #  print("Fecha: ", ifecha.strftime('%Y-%m-%d %H:%M')) #Con .strftime puedes coger una parte el día o la hora
 
-    if(stipo=="pleamar"):
-        print("En el día", sfecha.strftime('%Y-%m-%d'), "la marea estará subiendo hasta las", shora, )
-    else:
-        print("En el día", sfecha.strftime('%Y-%m-%d'), "la marea estará bajando hasta las", shora, )
+     # if(stipo=="pleamar"):
+        #  print("En el día", sfecha.strftime('%Y-%m-%d'), "la marea estará subiendo hasta las", shora, )
+     # else:
+        #  print("En el día", sfecha.strftime('%Y-%m-%d'), "la marea estará bajando hasta las", shora, )
 
-else:
-    print("No se encontró una fecha y hora siguientes en los datos.")
+ # else:
+    #  print("No se encontró una fecha y hora siguientes en los datos.")
 
 
 #CREAMOS EL MENÚ
-# Mostrar todo
-#def op1():
-#    print('Has elegido la opción 1')
+while True:
+    print("\n Menú:")
+    print("1. Mostrar")
+    print("2. Filtrar")
+    print("3. Predicción")
+    print("4. Salir \n")
+    
+    opcion = input("Introduce una opción: ")
 
-# Filtrar por fecha
-#def op2():
-#    print('Has elegido la opción 2')
+    # Mostrar todo
+    if opcion == '1':
+        print("1")
+     
+    # Filtrar por día
+    elif opcion == '2':
+        print("2")
+      
+    # Predicción
+    elif opcion == '3':
+        print("3")
+        
+    # Salir
+    elif opcion == '4':
+       break  
 
-# Salir
-#def op3():
-#    print('Salir')
+    # Te has equivocado
+    else:
+        print("Opción incorrecta")
 
-# Creamos el menú
-#menu = {
-#   '1': ('1.- Mostrar menú',op1),
-#   '2': ('2.- Filtrar por fecha',op2),
-#   '3': ('3.- Salir',op3)
-#}
-
-# Para que el usuario pueda seleccionar opcion
-#op = input("Seleccione una opcion: ")
-
-# Excepcion o Accion
-#accion = menu.get(op)
-#if accion: #si la accion existe que se ejecute
-#   accion()
-#else: #si la opcion no existe que de error
-#   print("Opción no válida")
 
 
 
