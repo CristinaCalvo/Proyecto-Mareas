@@ -15,3 +15,5 @@ Opción 3: Muestra todos los datos filtrados por tipo
 Opción 4: Muestra si la marea está bajando o subiendo dependiendo del día y hora que tu hayas introducido, te indíca el porcentaje de subida o bajada y hasta que hora 
 
 Opción 5: Salir
+
+También se valoran errores, como fechas mal puestas, que la fehca que introduzcas no este en el rango(Octubre), que escribas mal algina palabra como pleamar, etc
