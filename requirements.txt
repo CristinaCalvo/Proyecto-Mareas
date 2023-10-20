@@ -1,4 +1,5 @@
 python~=3.9
+pip~=23.2.1
 module~=requests
 
 
