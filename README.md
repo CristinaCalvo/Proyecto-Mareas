@@ -16,4 +16,4 @@ Opción 4: Muestra si la marea está bajando o subiendo dependiendo del día y h
 
 Opción 5: Salir
 
-También se valoran errores, como fechas mal puestas, que la fehca que introduzcas no este en el rango(Octubre), que escribas mal algina palabra como pleamar, etc
+También se valoran errores, como fechas mal puestas, que la fehca que introduzcas no este en el rango(Octubre), que escribas mal alguna palabra como pleamar, etc
