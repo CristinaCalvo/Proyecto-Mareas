@@ -95,6 +95,73 @@ while True:
         # Si no seleccionas nada  
         if not vfecha:
             ifecha = datetime.datetime.now() # Se pone la hora del sistema
+
+             # Recorremos datos
+            datos = fichero['mareas']['datos']['marea']
+            for i in range(len(datos)):
+                fechaanterior = datos[i]['fecha']
+                horaanterior = datos[i]['hora']
+                tipo = datos[i]['tipo']
+
+                try:
+                 fechasiguiente = datos[i+1]['fecha']
+                 horasiguiente = datos[i+1]['hora']
+                except IndexError:
+                    print("Al haber introducido una hora que existe no podemos calcular el rango de horas")
+                    exit()
+
+            # Convierte la fecha y hora actual en datetime para compararlos(tanto día como hora)
+                fechaInicial = datetime.datetime.strptime(fechaanterior + ' ' + horaanterior, '%Y-%m-%d %H:%M')
+                fechaFinal = datetime.datetime.strptime(fechasiguiente + ' ' + horasiguiente, '%Y-%m-%d %H:%M')
+
+            # Compara si la fecha y hora actual es mayor a la ingresada
+                if fechaInicial < ifecha and fechaFinal > ifecha:
+
+                    horaInicial = fechaInicial.hour
+                    minutoInicial = fechaInicial.minute
+
+                    horaIntroducida = ifecha.hour
+                    minutoIntroducido = ifecha.minute
+
+                    horaFinal = fechaFinal.hour
+                    minutoFinal = fechaFinal.minute
+
+                # Hacemos porcentaje
+                    inicio = (horaInicial * 60) + minutoInicial
+                    introducido = (horaIntroducida * 60) + minutoIntroducido
+                    final = (horaFinal * 60) + minutoFinal
+
+                    
+
+                    tTotal = final - inicio
+                    tTranscurrido = introducido - inicio
+                    porcentaje = (tTranscurrido/tTotal) * 100
+
+
+                    stipo = tipo
+                   
+
+                    break #Para que no recorra todo
+
+            
+            if fechaInicial:
+               
+                print("Fecha: ", ifecha.strftime('%Y-%m-%d %H:%M')) #Con .strftime puedes coger una parte el día o la hora
+
+           
+                if(stipo=="pleamar"):
+                    print("En el día", fechaFinal.strftime('%Y-%m-%d'), "la marea estará subiendo hasta las", fechaFinal.strftime('%H:%M'), "está al {:.2f}%".format(porcentaje))
+                    # porcentaje_subida = ((total3 - total1) / (total2 - total1)) * 100
+                    # print("La marea ha subido un {:.2f}% desde la hora anterior.".format(porcentaje_subida))
+                else:
+                    print("En el día", fechaFinal.strftime('%Y-%m-%d'), "la marea estará bajando hasta las", fechaFinal.strftime('%H:%M'), "está al {:.2f}%".format(porcentaje))
+                    # porcentaje_subida = ((total3 - total1) / (total2 - total1)) * 100
+                    # print("La marea ha bajado un {:.2f}% desde la hora anterior.".format(porcentaje_subida))
+           
+                    
+            else:
+                    print("No se encontró una fecha y hora siguientes en los datos.")
+
         else:
 
             # Si seleccionas fecha y hora
