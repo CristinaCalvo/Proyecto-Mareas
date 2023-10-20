@@ -4,11 +4,11 @@
 <p>https://ideihm.covam.es/portal/api-mareas/</p>
 
 <h2>Entorno Virtual</h2>
-<p>Para que puedas utilizar este programa debes de tener instalado Python 3</p>
-<p>Instale todo lo que hay en requirements.txt con el comando --> <i>pip install -r requirements.txt</i></p>
+<p>Para que puedas utilizar este programa debes de tener instalado Python 3, pip 23.2.1 y module request, si no tienes instalado nada de esto no te preocupes, lo único que tendrías que instalarte
+es pip 23.2.1 para posteriormente ejecutar el comando <i>pip install -r requirements.txt</i> y así descargarías todos los programas de una vez</p>
 
-<h2>¿Qué hace mi programa?</h2>
-<p>Lo que hace mi programa es conectarse a una API de las mareas de Cádiz en el mes de Octubre, con python he creado un menú que te deja elegir si quieres mostrar todos los datos o mostrar los datos por un filtro, como filtrar por día, filtrar por tipo o la predicción de marea</p>
+<h2>¿Qué hace el programa?</h2>
+<p>Lo que hace este programa es conectarse a una API de las mareas de Cádiz en el mes de Octubre, con python he creado un menú que te deja elegir si quieres mostrar todos los datos o mostrar los datos por un filtro, como filtrar por día, filtrar por tipo o la predicción de marea</p>
 
 <p>Opción 1: Mueestra todo --> Muestra todo los datos ordenadamente (con formato personalizado)</p>
 <p>Opción 2: Filtrar por día --> Muestra todos los datos que haya en un día que tu escribes por consola</p>
